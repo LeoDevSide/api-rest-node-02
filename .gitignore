@@ -1,2 +1,3 @@
 tmp/app.db
 node_modules
+package-loc.json
