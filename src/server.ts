@@ -1,16 +1,15 @@
 import fastify from 'fastify'
 import { env } from './env'
-
+import { transactionsRoutes } from './routes/transactions'
 const app = fastify()
 
-const start = async () => {
-  try {
-    await app.listen({ port: env.PORT })
-    console.log(`LISTENING ON ${env.PORT}`)
-  } catch (err) {
-    app.log.error(err)
-    process.exit(1)
-  }
-}
+app.register(transactionsRoutes)
 
-start()
+app
+  .listen({
+    port: env.PORT,
+  })
+  .then(() => {
+    console.log(`${env.DATABASE_URL}`)
+    console.log(`LISTENING ON ${env.PORT}`)
+  })
